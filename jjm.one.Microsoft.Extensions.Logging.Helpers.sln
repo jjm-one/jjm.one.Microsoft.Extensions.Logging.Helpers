@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Microsoft.Extensions.Logging.Helpers", "jjm.one.Microsoft.Extensions.Logging.Helpers\jjm.one.Microsoft.Extensions.Logging.Helpers.csproj", "{27489108-8F24-4406-86AF-9DA6382143B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Microsoft.Extensions.Logging.Helpers", "src\jjm.one.Microsoft.Extensions.Logging.Helpers\jjm.one.Microsoft.Extensions.Logging.Helpers.csproj", "{27489108-8F24-4406-86AF-9DA6382143B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Microsoft.Extensions.Logging.Helpers.Tests", "jjm.one.Microsoft.Extensions.Logging.Helpers.Tests\jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.csproj", "{1A31BFD2-3285-4142-87EE-36B4B7B353BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Microsoft.Extensions.Logging.Helpers.Tests", "tests\jjm.one.Microsoft.Extensions.Logging.Helpers.Tests\jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.csproj", "{1A31BFD2-3285-4142-87EE-36B4B7B353BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

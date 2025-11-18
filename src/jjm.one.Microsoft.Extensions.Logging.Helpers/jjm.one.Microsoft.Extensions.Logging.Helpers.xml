@@ -1,49 +1,73 @@
 <?xml version="1.0"?>
 <doc>
-    <assembly>
-        <name>jjm.one.Microsoft.Extensions.Logging.Helpers</name>
-    </assembly>
-    <members>
-        <member name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging">
-            <summary>
-            Static class for all function logging helper extensions.
-            </summary>
-        </member>
-        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-            Log a function/method call.
-            </summary>
-            <param name="logger">The logger instance.</param>
-            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.</param>
-        </member>
-        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,System.Type,System.Reflection.MethodBase,Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-            Log a function/method call.
-            </summary>
-            <param name="logger">The logger instance.</param>
-            <param name="classType">The <see cref="T:System.Type"/> of the calling class.</param>
-            <param name="methodType">The <see cref="T:System.Reflection.MethodBase"/> of the calling function/method.</param>
-            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.</param>
-        </member>
-        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-            Log an exception within a function/method call.
-            </summary>
-            <param name="logger">The logger instance.</param>
-            <param name="exc">The exception.</param>
-            <param name="msg">The message of the exception.</param>
-            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.</param>
-        </member>
-        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Type,System.Reflection.MethodBase,System.String,Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-            Log an exception within a function/method call.
-            </summary>
-            <param name="logger">The logger instance.</param>
-            <param name="exc">The exception.</param>
-            <param name="classType">The <see cref="T:System.Type"/> of the calling class.</param>
-            <param name="methodType">The <see cref="T:System.Reflection.MethodBase"/> of the calling function/method.</param>
-            <param name="msg">The message of the exception.</param>
-            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.</param>
-        </member>
-    </members>
+  <assembly>
+    <name>jjm.one.Microsoft.Extensions.Logging.Helpers</name>
+  </assembly>
+  <members>
+    <member name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging">
+      <summary>
+        Static class for all function logging helper extensions.
+      </summary>
+    </member>
+    <member
+      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)">
+      <summary>
+        Log a function/method call.
+      </summary>
+      <param name="logger">The logger instance.</param>
+      <param name="level">The logging level. Default is<see
+        cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.
+      </param>
+    </member>
+    <member
+      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,System.Type,System.Reflection.MethodBase,Microsoft.Extensions.Logging.LogLevel)">
+      <summary>
+        Log a function/method call.
+      </summary>
+      <param name="logger">The logger instance.</param>
+      <param name="classType">The
+        <see cref="T:System.Type"/>
+        of the calling class.
+      </param>
+      <param name="methodType">The
+        <see cref="T:System.Reflection.MethodBase"/>
+        of the calling function/method.
+      </param>
+      <param name="level">The logging level. Default is<see
+        cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.
+      </param>
+    </member>
+    <member
+      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,Microsoft.Extensions.Logging.LogLevel)">
+      <summary>
+        Log an exception within a function/method call.
+      </summary>
+      <param name="logger">The logger instance.</param>
+      <param name="exc">The exception.</param>
+      <param name="msg">The message of the exception.</param>
+      <param name="level">The logging level. Default is<see
+        cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.
+      </param>
+    </member>
+    <member
+      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Type,System.Reflection.MethodBase,System.String,Microsoft.Extensions.Logging.LogLevel)">
+      <summary>
+        Log an exception within a function/method call.
+      </summary>
+      <param name="logger">The logger instance.</param>
+      <param name="exc">The exception.</param>
+      <param name="classType">The
+        <see cref="T:System.Type"/>
+        of the calling class.
+      </param>
+      <param name="methodType">The
+        <see cref="T:System.Reflection.MethodBase"/>
+        of the calling function/method.
+      </param>
+      <param name="msg">The message of the exception.</param>
+      <param name="level">The logging level. Default is<see
+        cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.
+      </param>
+    </member>
+  </members>
 </doc>
