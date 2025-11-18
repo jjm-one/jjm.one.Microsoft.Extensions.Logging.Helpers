@@ -178,7 +178,7 @@ csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
 
 # analyzers: common hygiene
-dotnet_diagnostic.IDE0005.severity = warning   # Remove unnecessary usings
+dotnet_diagnostic.IDE0005.severity = warning # Remove unnecessary usings
 dotnet_diagnostic.IDE0060.severity = suggestion # Remove unused parameter
 dotnet_diagnostic.IDE0044.severity = suggestion # Make field readonly
 dotnet_diagnostic.IDE0051.severity = suggestion # Remove unused private members

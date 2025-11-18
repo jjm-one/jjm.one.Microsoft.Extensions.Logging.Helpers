@@ -14,15 +14,15 @@ the [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Exte
 ## Table of contents
 
 - [jjm.one.Microsoft.Extensions.Logging.Helpers](#jjmonemicrosoftextensionslogginghelpers)
-    - [Status](#status)
-    - [Table of contents](#table-of-contents)
-    - [Nuget Package](#nuget-package)
-        - [Installing the Nuget Package](#installing-the-nuget-package)
-    - [Usage](#usage)
-        - [Use function logging](#use-function-logging)
-        - [Output of function logging](#output-of-function-logging)
-    - [Full Documentation](#full-documentation)
-    - [Repo](#repo)
+  - [Status](#status)
+  - [Table of contents](#table-of-contents)
+  - [Nuget Package](#nuget-package)
+    - [Installing the Nuget Package](#installing-the-nuget-package)
+  - [Usage](#usage)
+    - [Use function logging](#use-function-logging)
+    - [Output of function logging](#output-of-function-logging)
+  - [Full Documentation](#full-documentation)
+  - [Repo](#repo)
 
 ## Nuget Package
 
@@ -31,15 +31,15 @@ form [nuget.org](https://www.nuget.org/packages/jjm.one.Microsoft.Extensions.Log
 
 ### Installing the Nuget Package
 
-| Tool                 | Command/Code                                                                                      |
-|----------------------|---------------------------------------------------------------------------------------------------|
-| Package Manager      | ```PM> Install-Package jjm.one.Microsoft.Extensions.Logging.Helpers -Version X.Y.Z```             |
-| .NET CLI             | ```> dotnet add package jjm.one.Microsoft.Extensions.Logging.Helpers --version X.Y.Z```           |
-| PackageReference     | ```<PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="X.Y.Z" />``` |
-| Package CLI          | ```> paket add jjm.one.Microsoft.Extensions.Logging.Helpers --version X.Y.Z```                    |
-| Script & Interactive | ```> #r "nuget: jjm.one.Microsoft.Extensions.Logging.Helpers, X.Y.Z"```                           |
-| Cake as Addin        | ```#addin nuget:?package=jjm.one.Microsoft.Extensions.Logging.Helpers&version=X.Y.Z```            |
-| Cake as Tool         | ```#tool nuget:?package=jjm.one.Microsoft.Extensions.Logging.Helpers&version=X.Y.Z```             |
+| Tool                 | Command/Code                                                                                  |
+|----------------------|-----------------------------------------------------------------------------------------------|
+| Package Manager      | `PM> Install-Package jjm.one.Microsoft.Extensions.Logging.Helpers -Version X.Y.Z`             |
+| .NET CLI             | `> dotnet add package jjm.one.Microsoft.Extensions.Logging.Helpers --version X.Y.Z`           |
+| PackageReference     | `<PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="X.Y.Z" />` |
+| Package CLI          | `> paket add jjm.one.Microsoft.Extensions.Logging.Helpers --version X.Y.Z`                    |
+| Script & Interactive | `> #r "nuget: jjm.one.Microsoft.Extensions.Logging.Helpers, X.Y.Z"`                           |
+| Cake as Addin        | `#addin nuget:?package=jjm.one.Microsoft.Extensions.Logging.Helpers&version=X.Y.Z`            |
+| Cake as Tool         | `#tool nuget:?package=jjm.one.Microsoft.Extensions.Logging.Helpers&version=X.Y.Z`             |
 
 ## Usage
 
@@ -59,13 +59,13 @@ class MyClass {
         logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Debug);
 
         try {
-            
+
             //...
         }
         catch (Exception exc) {
 
-            // Log the exception (minimal parameters)      
-            logger.LogExcInFctCall(exc);      
+            // Log the exception (minimal parameters)
+            logger.LogExcInFctCall(exc);
 
             // Log the exception (full parameters)
             logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), "My custom exception message!", LogLevel.Error);

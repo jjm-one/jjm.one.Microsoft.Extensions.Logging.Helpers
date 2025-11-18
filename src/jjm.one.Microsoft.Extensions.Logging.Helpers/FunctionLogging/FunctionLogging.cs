@@ -1,4 +1,3 @@
-﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -17,7 +16,7 @@ public static class FunctionLogging
     /// <param name="level">The logging level. Default is <see cref="LogLevel.Debug" />.</param>
     public static void LogFctCall(this ILogger logger, LogLevel level = LogLevel.Debug)
     {
-        var method = new StackTrace().GetFrame(1)?.GetMethod();
+        MethodBase? method = new StackTrace().GetFrame(1)?.GetMethod();
 
         logger.Log(level, "Function called: {ClassName} -> {FctName}",
             method?.DeclaringType?.Name, method?.Name);
@@ -47,7 +46,7 @@ public static class FunctionLogging
     public static void LogExcInFctCall(this ILogger logger, Exception exc, string? msg = null,
         LogLevel level = LogLevel.Error)
     {
-        var method = new StackTrace().GetFrame(1)?.GetMethod();
+        MethodBase? method = new StackTrace().GetFrame(1)?.GetMethod();
 
         if (string.IsNullOrEmpty(msg))
         {

@@ -1,53 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net10.0</TargetFrameworks>
-        <ImplicitUsings>disable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <Version>10.0.0</Version>
-        <Authors>Jonas Merkle [JJM]</Authors>
-        <Copyright>© by Jonas Merkle [JJM], 2025.</Copyright>
-        <PackageId>jjm.one.Microsoft.Extensions.Logging.Helpers</PackageId>
-        <Title>jjm.one.Microsoft.Extensions.Logging.Helpers</Title>
-        <Description>A collection of helper functions for the Microsoft logging tool.</Description>
-        <PackageTags>extension, csharp, logging, microsoft-extensions-logging, microsoft-extensions</PackageTags>
-        <PackageProjectUrl>https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers</PackageProjectUrl>
-        <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers.git</RepositoryUrl>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>jjm.one.Microsoft.Extensions.Logging.Helpers.SignKey.snk</AssemblyOriginatorKeyFile>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <PackageIcon>jjm.one-logo_1024x1024.png</PackageIcon>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(AuxNetCoreTargetFramework)</TargetFrameworks>
+    <PackageId>$(_ProjectName)</PackageId>
+    <Title>$(_ProjectName)</Title>
+    <AssemblyName>$(_ProjectName)</AssemblyName>
+    <RootNamespace>$(_ProjectName)</RootNamespace>
+    <Description>A collection of helper functions for the Microsoft logging tool.</Description>
+    <PackageTags>extension, csharp, logging, microsoft-extensions-logging, microsoft-extensions</PackageTags>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\jjm.one.Microsoft.Extensions.Logging.Helpers.SignKey.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <LangVersion>latestmajor</LangVersion>
-        <DocumentationFile>.\jjm.one.Microsoft.Extensions.Logging.Helpers.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <LangVersion>latestmajor</LangVersion>
-        <DocumentationFile>.\jjm.one.Microsoft.Extensions.Logging.Helpers.xml</DocumentationFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\..\LICENSE">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-        <None Include="..\..\README.md">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-        <None Include="..\..\resources\logo\jjm.one-logo_1024x1024.png">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0"/>
-    </ItemGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>.\jjm.one.Microsoft.Extensions.Logging.Helpers.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>.\jjm.one.Microsoft.Extensions.Logging.Helpers.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+  </ItemGroup>
 
 </Project>

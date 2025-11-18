@@ -1,0 +1,47 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultNetCoreTargetFramework>net10.0</DefaultNetCoreTargetFramework>
+    <AuxNetCoreTargetFramework>net8.0</AuxNetCoreTargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_ProjectCompany>jjm.one</_ProjectCompany>
+    <_ProjectCopyright>© 2025, jjm.one.</_ProjectCopyright>
+    <_ProjectAuthors>Jonas Merkle [JJM]</_ProjectAuthors>
+    <_ProjectName>jjm.one.Microsoft.Extensions.Logging.Helpers</_ProjectName>
+    <Version>1.0.0-alpha.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Company>$(_ProjectCompany)</Company>
+    <Copyright>$(_ProjectCopyright)</Copyright>
+    <Authors>$(_ProjectAuthors)</Authors>
+    <Product>$(_ProjectName)</Product>
+    <PackageProjectUrl>https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>jjm.one-logo_1024x1024.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)$(PackageReadmeFile)" Pack="True" PackagePath="" Visible="false"/>
+    <None Include="$(MSBuildThisFileDirectory)$(PackageLicenseFile)" Pack="True" PackagePath="" Visible="false"/>
+    <None Include="$(MSBuildThisFileDirectory)\resources\logo\$(PackageIcon)" Pack="True" PackagePath="" Visible="false"/>
+  </ItemGroup>
+
+</Project>
