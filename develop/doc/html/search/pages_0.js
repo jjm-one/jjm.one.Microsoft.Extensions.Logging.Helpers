@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jjm_2eone_2emicrosoft_2eextensions_2elogging_2ehelpers_11',['jjm.one.Microsoft.Extensions.Logging.Helpers',['../index.html',1,'']]]
+  ['extensions_20logging_20helpers_0',['jjm.one.Microsoft.Extensions.Logging.Helpers',['../index.html',1,'']]]
 ];
