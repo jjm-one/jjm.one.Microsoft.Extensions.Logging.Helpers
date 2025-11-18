@@ -6,7 +6,7 @@ the [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Exte
 ## Status
 
 |                               |                                                                                                                                                                                                                                                             |
-|------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |    Build & Test Status (main) | [![Build&Test](https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jjm-one/jjm.one.Microsoft.Extensions.Logging.Helpers/actions/workflows/dotnet.yml)                       |
 |         Nuget Package Version | [![Nuget Version](https://img.shields.io/nuget/v/jjm.one.Microsoft.Extensions.Logging.Helpers?style=flat-square)](https://www.nuget.org/packages/jjm.one.Microsoft.Extensions.Logging.Helpers/)                                                             |
 | SonarCloudQuality Gate Status | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jjm-one_jjm.one.Microsoft.Extensions.Logging.Helpers&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jjm-one_jjm.one.Microsoft.Extensions.Logging.Helpers) |
@@ -32,7 +32,7 @@ form [nuget.org](https://www.nuget.org/packages/jjm.one.Microsoft.Extensions.Log
 ### Installing the Nuget Package
 
 | Tool                 | Command/Code                                                                                  |
-|----------------------|-----------------------------------------------------------------------------------------------|
+| -------------------- | --------------------------------------------------------------------------------------------- |
 | Package Manager      | `PM> Install-Package jjm.one.Microsoft.Extensions.Logging.Helpers -Version X.Y.Z`             |
 | .NET CLI             | `> dotnet add package jjm.one.Microsoft.Extensions.Logging.Helpers --version X.Y.Z`           |
 | PackageReference     | `<PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="X.Y.Z" />` |
