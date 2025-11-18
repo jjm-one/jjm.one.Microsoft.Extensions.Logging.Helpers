@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">jjm.one.Microsoft.Extensions.Logging.Helpers<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">jjm.one.Microsoft.Extensions.Logging.Helpers<span id="projectnumber">&#160;10.0.0</span>
    </div>
    <div id="projectbrief">A collection of helper functions for the Microsoft.Extensions.Logging logging tool.</div>
   </td>
@@ -146,13 +146,13 @@ Use function logging</h2>
 <div class="line">        logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Debug);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">try</span> {</div>
-<div class="line">            </div>
+<div class="line"> </div>
 <div class="line">            <span class="comment">//...</span></div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">catch</span> (Exception exc) {</div>
 <div class="line"> </div>
-<div class="line">            <span class="comment">// Log the exception (minimal parameters)      </span></div>
-<div class="line">            logger.LogExcInFctCall(exc);      </div>
+<div class="line">            <span class="comment">// Log the exception (minimal parameters)</span></div>
+<div class="line">            logger.LogExcInFctCall(exc);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Log the exception (full parameters)</span></div>
 <div class="line">            logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), <span class="stringliteral">&quot;My custom exception message!&quot;</span>, LogLevel.Error);</div>
