@@ -5,8 +5,8 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Title>$(_ProjectName).Tests</Title>
-    <AssemblyName>$(_ProjectName).Test</AssemblyName>
-    <RootNamespace>$(_ProjectName).Test</RootNamespace>
+    <AssemblyName>$(_ProjectName).Tests</AssemblyName>
+    <RootNamespace>$(_ProjectName).Tests</RootNamespace>
     <Description>A collection of helper functions for the Microsoft logging tool. (Unit-Tests)</Description>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
