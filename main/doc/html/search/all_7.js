@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['logexcinfctcall_0',['logexcinfctcall',['../classjjm_1_1one_1_1Microsoft_1_1Extensions_1_1Logging_1_1Helpers_1_1FunctionLogging.html#ab28e89505fac5831df5672d025f3751b',1,'jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(this ILogger logger, Exception exc, string? msg=null, LogLevel level=LogLevel.Error)'],['../classjjm_1_1one_1_1Microsoft_1_1Extensions_1_1Logging_1_1Helpers_1_1FunctionLogging.html#a483770d099b46f7bdea5a29ba9564bce',1,'jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(this ILogger logger, Exception exc, Type? classType, MethodBase? methodType, string? msg=null, LogLevel level=LogLevel.Error)']]],
+  ['logfctcall_1',['logfctcall',['../classjjm_1_1one_1_1Microsoft_1_1Extensions_1_1Logging_1_1Helpers_1_1FunctionLogging.html#a7644e9937d259e2ec652690e9e5f85cb',1,'jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(this ILogger logger, LogLevel level=LogLevel.Debug)'],['../classjjm_1_1one_1_1Microsoft_1_1Extensions_1_1Logging_1_1Helpers_1_1FunctionLogging.html#a912b3ae029d9ff1490ac63f26ca17fec',1,'jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(this ILogger logger, Type? classType, MethodBase? methodType, LogLevel level=LogLevel.Debug)']]],
+  ['logging_2',['logging',['../index.html#autotoc_md7',1,'Output of function logging'],['../index.html#autotoc_md6',1,'Use function logging']]],
+  ['logging_20helpers_3',['jjm.one.Microsoft.Extensions.Logging.Helpers',['../index.html',1,'']]]
+];

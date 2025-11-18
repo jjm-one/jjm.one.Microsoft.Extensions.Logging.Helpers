@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jjm_2eone_2emicrosoft_2eextensions_2elogging_2ehelpers_2',['jjm.one.Microsoft.Extensions.Logging.Helpers',['../index.html',1,'']]]
+  ['documentation_0',['Full Documentation',['../index.html#autotoc_md8',1,'']]]
 ];
