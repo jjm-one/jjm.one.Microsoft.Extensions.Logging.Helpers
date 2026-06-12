@@ -23,10 +23,15 @@ public static class FunctionLogging
         [CallerMemberName] string memberName = "",
         [CallerFilePath] string sourceFilePath = "")
     {
-        if (logger is null) throw new ArgumentNullException(nameof(logger));
+        if (logger is null)
+        {
+            throw new ArgumentNullException(nameof(logger));
+        }
 
         if (!logger.IsEnabled(level))
+        {
             return;
+        }
 
         logger.Log(level, "Function called: {ClassName} -> {FctName}",
             Path.GetFileNameWithoutExtension(sourceFilePath), memberName);
@@ -45,10 +50,15 @@ public static class FunctionLogging
         MethodBase? methodType,
         LogLevel level = LogLevel.Debug)
     {
-        if (logger is null) throw new ArgumentNullException(nameof(logger));
+        if (logger is null)
+        {
+            throw new ArgumentNullException(nameof(logger));
+        }
 
         if (!logger.IsEnabled(level))
+        {
             return;
+        }
 
         logger.Log(level, "Function called: {ClassName} -> {FctName}",
             classType?.Name, methodType?.Name);
@@ -72,11 +82,20 @@ public static class FunctionLogging
         [CallerMemberName] string memberName = "",
         [CallerFilePath] string sourceFilePath = "")
     {
-        if (logger is null) throw new ArgumentNullException(nameof(logger));
-        if (exc is null) throw new ArgumentNullException(nameof(exc));
+        if (logger is null)
+        {
+            throw new ArgumentNullException(nameof(logger));
+        }
+
+        if (exc is null)
+        {
+            throw new ArgumentNullException(nameof(exc));
+        }
 
         if (!logger.IsEnabled(level))
+        {
             return;
+        }
 
         var customMsg = string.IsNullOrWhiteSpace(msg) ? string.Empty : "\n" + msg;
 
@@ -101,11 +120,20 @@ public static class FunctionLogging
         string? msg = null,
         LogLevel level = LogLevel.Error)
     {
-        if (logger is null) throw new ArgumentNullException(nameof(logger));
-        if (exc is null) throw new ArgumentNullException(nameof(exc));
+        if (logger is null)
+        {
+            throw new ArgumentNullException(nameof(logger));
+        }
+
+        if (exc is null)
+        {
+            throw new ArgumentNullException(nameof(exc));
+        }
 
         if (!logger.IsEnabled(level))
+        {
             return;
+        }
 
         var customMsg = string.IsNullOrWhiteSpace(msg) ? string.Empty : "\n" + msg;
 

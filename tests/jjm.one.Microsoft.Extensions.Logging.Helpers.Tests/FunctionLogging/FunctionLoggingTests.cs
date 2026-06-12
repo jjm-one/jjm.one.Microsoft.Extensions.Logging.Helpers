@@ -149,7 +149,8 @@ public class FunctionLoggingTests
     public void LogFctCall_Explicit_NullLogger_ThrowsArgumentNullException()
     {
         ILogger? nullLogger = null;
-        Assert.Throws<ArgumentNullException>(() => nullLogger!.LogFctCall(GetType(), MethodBase.GetCurrentMethod()));
+        Assert.Throws<ArgumentNullException>(() =>
+            nullLogger!.LogFctCall(GetType(), MethodBase.GetCurrentMethod()));
     }
 
     [Fact]
@@ -176,7 +177,8 @@ public class FunctionLoggingTests
                 It.Is<LogLevel>(l => l == LogLevel.Debug),
                 It.IsAny<EventId>(),
                 It.Is<It.IsAnyType>((o, _) =>
-                    o.ToString()!.StartsWith($"Function called: {nameof(FunctionLoggingTests)} -> ")),
+                    o.ToString()!.StartsWith(
+                        $"Function called: {nameof(FunctionLoggingTests)} -> ")),
                 It.IsAny<Exception?>(),
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
@@ -293,10 +295,8 @@ public class FunctionLoggingTests
     }
 
     [Fact]
-    public void LogExcInFctCall_AutoDetect_NullException_ThrowsArgumentNullException()
-    {
+    public void LogExcInFctCall_AutoDetect_NullException_ThrowsArgumentNullException() =>
         Assert.Throws<ArgumentNullException>(() => _logger.Object.LogExcInFctCall(null!));
-    }
 
     #endregion
 
@@ -444,7 +444,8 @@ public class FunctionLoggingTests
                 It.Is<LogLevel>(l => l == LogLevel.Error),
                 It.IsAny<EventId>(),
                 It.Is<It.IsAnyType>((o, _) =>
-                    o.ToString()!.StartsWith($"Exception thrown in: {nameof(FunctionLoggingTests)} -> ")),
+                    o.ToString()!.StartsWith(
+                        $"Exception thrown in: {nameof(FunctionLoggingTests)} -> ")),
                 It.Is<Exception>(e => e == exc),
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
