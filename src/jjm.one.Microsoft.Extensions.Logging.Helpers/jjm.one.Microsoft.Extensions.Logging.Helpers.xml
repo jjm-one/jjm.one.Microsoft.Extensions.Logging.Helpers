@@ -1,79 +1,55 @@
 <?xml version="1.0"?>
 <doc>
-  <assembly>
-    <name>jjm.one.Microsoft.Extensions.Logging.Helpers</name>
-  </assembly>
-  <members>
-    <member name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging">
-      <summary>
-        Static class for all function logging helper extensions.
-      </summary>
-    </member>
-    <member
-      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.String)">
-      <summary>
-        Log a function/method call. The class and method names are resolved at compile time via
-        caller-info attributes — zero allocation, no stack walk.
-      </summary>
-      <param name="logger">The logger instance.</param>
-      <param name="level">The logging level. Default is<see
-        cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.
-      </param>
-      <param name="memberName">Compiler-supplied calling member name.</param>
-      <param name="sourceFilePath">Compiler-supplied calling source file path.</param>
-    </member>
-    <member
-      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,System.Type,System.Reflection.MethodBase,Microsoft.Extensions.Logging.LogLevel)">
-      <summary>
-        Log a function/method call.
-      </summary>
-      <param name="logger">The logger instance.</param>
-      <param name="classType">The
-        <see cref="T:System.Type"/>
-        of the calling class.
-      </param>
-      <param name="methodType">The
-        <see cref="T:System.Reflection.MethodBase"/>
-        of the calling function/method.
-      </param>
-      <param name="level">The logging level. Default is<see
-        cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>.
-      </param>
-    </member>
-    <member
-      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,Microsoft.Extensions.Logging.LogLevel,System.String,System.String)">
-      <summary>
-        Log an exception within a function/method call. The class and method names are resolved at
-        compile time via caller-info attributes — zero allocation, no stack walk.
-      </summary>
-      <param name="logger">The logger instance.</param>
-      <param name="exc">The exception.</param>
-      <param name="msg">An optional context message appended to the log entry.</param>
-      <param name="level">The logging level. Default is<see
-        cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.
-      </param>
-      <param name="memberName">Compiler-supplied calling member name.</param>
-      <param name="sourceFilePath">Compiler-supplied calling source file path.</param>
-    </member>
-    <member
-      name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Type,System.Reflection.MethodBase,System.String,Microsoft.Extensions.Logging.LogLevel)">
-      <summary>
-        Log an exception within a function/method call.
-      </summary>
-      <param name="logger">The logger instance.</param>
-      <param name="exc">The exception.</param>
-      <param name="classType">The
-        <see cref="T:System.Type"/>
-        of the calling class.
-      </param>
-      <param name="methodType">The
-        <see cref="T:System.Reflection.MethodBase"/>
-        of the calling function/method.
-      </param>
-      <param name="msg">An optional context message appended to the log entry.</param>
-      <param name="level">The logging level. Default is<see
-        cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>.
-      </param>
-    </member>
-  </members>
+    <assembly>
+        <name>jjm.one.Microsoft.Extensions.Logging.Helpers</name>
+    </assembly>
+    <members>
+        <member name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging">
+            <summary>
+                Static class for all function logging helper extensions.
+            </summary>
+        </member>
+        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.String)">
+            <summary>
+                Log a function/method call. The class and method names are resolved at compile time via
+                caller-info attributes — zero allocation, no stack walk.
+            </summary>
+            <param name="logger">The logger instance.</param>
+            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug" />.</param>
+            <param name="memberName">Compiler-supplied calling member name.</param>
+            <param name="sourceFilePath">Compiler-supplied calling source file path.</param>
+        </member>
+        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogFctCall(Microsoft.Extensions.Logging.ILogger,System.Type,System.Reflection.MethodBase,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+                Log a function/method call.
+            </summary>
+            <param name="logger">The logger instance.</param>
+            <param name="classType">The <see cref="T:System.Type" /> of the calling class.</param>
+            <param name="methodType">The <see cref="T:System.Reflection.MethodBase" /> of the calling function/method.</param>
+            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug" />.</param>
+        </member>
+        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,Microsoft.Extensions.Logging.LogLevel,System.String,System.String)">
+            <summary>
+                Log an exception within a function/method call. The class and method names are resolved at
+                compile time via caller-info attributes — zero allocation, no stack walk.
+            </summary>
+            <param name="logger">The logger instance.</param>
+            <param name="exc">The exception.</param>
+            <param name="msg">An optional context message appended to the log entry.</param>
+            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error" />.</param>
+            <param name="memberName">Compiler-supplied calling member name.</param>
+            <param name="sourceFilePath">Compiler-supplied calling source file path.</param>
+        </member>
+        <member name="M:jjm.one.Microsoft.Extensions.Logging.Helpers.FunctionLogging.LogExcInFctCall(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Type,System.Reflection.MethodBase,System.String,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+                Log an exception within a function/method call.
+            </summary>
+            <param name="logger">The logger instance.</param>
+            <param name="exc">The exception.</param>
+            <param name="classType">The <see cref="T:System.Type" /> of the calling class.</param>
+            <param name="methodType">The <see cref="T:System.Reflection.MethodBase" /> of the calling function/method.</param>
+            <param name="msg">An optional context message appended to the log entry.</param>
+            <param name="level">The logging level. Default is <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error" />.</param>
+        </member>
+    </members>
 </doc>

@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <doc>
-  <assembly>
-    <name>jjm.one.Microsoft.Extensions.Logging.Helpers.Tests</name>
-  </assembly>
-  <members>
-    <member
-      name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.FunctionLogging.FunctionLoggingTests">
-      <summary>
-        Tests for<see cref="N:jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.FunctionLogging"/>.
-      </summary>
-    </member>
-  </members>
+    <assembly>
+        <name>jjm.one.Microsoft.Extensions.Logging.Helpers.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.FunctionLogging.FunctionLoggingTests">
+            <summary>
+                Tests for <see cref="N:jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.FunctionLogging" />.
+            </summary>
+        </member>
+    </members>
 </doc>
