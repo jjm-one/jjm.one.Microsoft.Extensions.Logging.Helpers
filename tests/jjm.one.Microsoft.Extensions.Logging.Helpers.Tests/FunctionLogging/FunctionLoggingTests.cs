@@ -5,7 +5,7 @@ using Moq;
 namespace jjm.one.Microsoft.Extensions.Logging.Helpers.Tests.FunctionLogging;
 
 /// <summary>
-///     This class contains the tests for the <see cref="FunctionLogging" /> class.
+///     Tests for <see cref="FunctionLogging" />.
 /// </summary>
 public class FunctionLoggingTests
 {
@@ -17,172 +17,437 @@ public class FunctionLoggingTests
 
     #region ctors
 
-    /// <summary>
-    ///     The default constructor of the <see cref="FunctionLoggingTests" /> class.
-    /// </summary>
-    public FunctionLoggingTests() => _logger = new Mock<ILogger>();
+    public FunctionLoggingTests()
+    {
+        _logger = new Mock<ILogger>();
+        // Enable logging for all levels by default so positive tests don't need individual setup.
+        _logger.Setup(x => x.IsEnabled(It.IsAny<LogLevel>())).Returns(true);
+    }
 
     #endregion
 
-    #region tests
+    #region LogFctCall — auto-detect overload
 
-    /// <summary>
-    ///     1. test of the LogFctCall function.
-    /// </summary>
     [Fact]
-    public void LogFctCallTest1()
+    public void LogFctCall_AutoDetect_DefaultLevel_LogsDebug()
     {
-        // arrange
-        _logger.Setup(x => x.Log(LogLevel.Debug, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
-
-        // act
         _logger.Object.LogFctCall();
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Debug),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
-                    o.ToString()!.Equals($"Function called: {nameof(FunctionLoggingTests)} -> " +
-                                         $"{nameof(LogFctCallTest1)}")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.Is<LogLevel>(l => l == LogLevel.Debug),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.Equals(
+                        $"Function called: {nameof(FunctionLoggingTests)} -> " +
+                        $"{nameof(LogFctCall_AutoDetect_DefaultLevel_LogsDebug)}")),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
-    /// <summary>
-    ///     2. test of the LogFctCall function.
-    /// </summary>
-    [Fact]
-    public void LogFctCallTest2()
+    [Theory]
+    [InlineData(LogLevel.Trace)]
+    [InlineData(LogLevel.Information)]
+    [InlineData(LogLevel.Warning)]
+    [InlineData(LogLevel.Error)]
+    [InlineData(LogLevel.Critical)]
+    public void LogFctCall_AutoDetect_CustomLevel_LogsAtThatLevel(LogLevel level)
     {
-        // arrange
-        _logger.Setup(x => x.Log(LogLevel.Debug, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
+        _logger.Object.LogFctCall(level);
 
-        // act
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == level),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogFctCall_AutoDetect_LoggingDisabled_DoesNotLog()
+    {
+        var logger = new Mock<ILogger>();
+        logger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(false);
+
+        logger.Object.LogFctCall();
+
+        logger.Verify(x => x.Log(
+                It.IsAny<LogLevel>(),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Never);
+    }
+
+    [Fact]
+    public void LogFctCall_AutoDetect_NullLogger_ThrowsArgumentNullException()
+    {
+        ILogger? nullLogger = null;
+        Assert.Throws<ArgumentNullException>(() => nullLogger!.LogFctCall());
+    }
+
+    #endregion
+
+    #region LogFctCall — explicit type/method overload
+
+    [Fact]
+    public void LogFctCall_Explicit_DefaultLevel_LogsDebug()
+    {
         _logger.Object.LogFctCall(GetType(), MethodBase.GetCurrentMethod());
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Debug),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
-                    o.ToString()!.Equals($"Function called: {nameof(FunctionLoggingTests)} -> " +
-                                         $"{nameof(LogFctCallTest2)}")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.Is<LogLevel>(l => l == LogLevel.Debug),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.Equals(
+                        $"Function called: {nameof(FunctionLoggingTests)} -> " +
+                        $"{nameof(LogFctCall_Explicit_DefaultLevel_LogsDebug)}")),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
-    /// <summary>
-    ///     1. test of the LogExcInFctCall function.
-    /// </summary>
-    [Fact]
-    public void LogExcInFctCallTest1()
+    [Theory]
+    [InlineData(LogLevel.Trace)]
+    [InlineData(LogLevel.Information)]
+    [InlineData(LogLevel.Warning)]
+    [InlineData(LogLevel.Error)]
+    [InlineData(LogLevel.Critical)]
+    public void LogFctCall_Explicit_CustomLevel_LogsAtThatLevel(LogLevel level)
     {
-        // arrange
-        var exc = new Exception("Test");
-        _logger.Setup(x => x.Log(LogLevel.Error, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
+        _logger.Object.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), level);
 
-        // act
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == level),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogFctCall_Explicit_LoggingDisabled_DoesNotLog()
+    {
+        var logger = new Mock<ILogger>();
+        logger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(false);
+
+        logger.Object.LogFctCall(GetType(), MethodBase.GetCurrentMethod());
+
+        logger.Verify(x => x.Log(
+                It.IsAny<LogLevel>(),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Never);
+    }
+
+    [Fact]
+    public void LogFctCall_Explicit_NullLogger_ThrowsArgumentNullException()
+    {
+        ILogger? nullLogger = null;
+        Assert.Throws<ArgumentNullException>(() =>
+            nullLogger!.LogFctCall(GetType(), MethodBase.GetCurrentMethod()));
+    }
+
+    [Fact]
+    public void LogFctCall_Explicit_NullClassType_LogsNullClassName()
+    {
+        _logger.Object.LogFctCall(null, MethodBase.GetCurrentMethod());
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Debug),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.StartsWith("Function called: (null) -> ")),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogFctCall_Explicit_NullMethodType_LogsNullMethodName()
+    {
+        _logger.Object.LogFctCall(GetType(), null);
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Debug),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.StartsWith(
+                        $"Function called: {nameof(FunctionLoggingTests)} -> ")),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    #endregion
+
+    #region LogExcInFctCall — auto-detect overload
+
+    [Fact]
+    public void LogExcInFctCall_AutoDetect_NoMsg_LogsErrorWithoutCustomMsg()
+    {
+        var exc = new Exception("Test");
+
         _logger.Object.LogExcInFctCall(exc);
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
                     o.ToString()!.Equals(
                         $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
-                        $"{nameof(LogExcInFctCallTest1)}")),
+                        $"{nameof(LogExcInFctCall_AutoDetect_NoMsg_LogsErrorWithoutCustomMsg)}")),
                 It.Is<Exception>(e => e == exc),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
-    /// <summary>
-    ///     2. test of the LogExcInFctCall function.
-    /// </summary>
     [Fact]
-    public void LogExcInFctCallTest2()
+    public void LogExcInFctCall_AutoDetect_WithMsg_AppendsNewlineAndMsg()
     {
-        // arrange
         var exc = new Exception("Test");
-        _logger.Setup(x => x.Log(LogLevel.Error, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
 
-        // act
         _logger.Object.LogExcInFctCall(exc, "TestMSG");
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
                     o.ToString()!.Equals(
                         $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
-                        $"{nameof(LogExcInFctCallTest2)}\nTestMSG")),
+                        $"{nameof(LogExcInFctCall_AutoDetect_WithMsg_AppendsNewlineAndMsg)}\nTestMSG")),
                 It.Is<Exception>(e => e == exc),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
-    /// <summary>
-    ///     3. test of the LogExcInFctCall function.
-    /// </summary>
-    [Fact]
-    public void LogExcInFctCallTest3()
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void LogExcInFctCall_AutoDetect_NullOrWhitespaceMsg_LogsWithoutCustomMsg(string? msg)
     {
-        // arrange
         var exc = new Exception("Test");
-        _logger.Setup(x => x.Log(LogLevel.Error, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
 
-        // act
-        _logger.Object.LogExcInFctCall(exc, GetType(),
-            MethodBase.GetCurrentMethod());
+        _logger.Object.LogExcInFctCall(exc, msg);
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
                     o.ToString()!.Equals(
                         $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
-                        $"{nameof(LogExcInFctCallTest3)}")),
+                        $"{nameof(LogExcInFctCall_AutoDetect_NullOrWhitespaceMsg_LogsWithoutCustomMsg)}")),
                 It.Is<Exception>(e => e == exc),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
-    /// <summary>
-    ///     4. test of the LogExcInFctCall function.
-    /// </summary>
-    [Fact]
-    public void LogExcInFctCallTest4()
+    [Theory]
+    [InlineData(LogLevel.Trace)]
+    [InlineData(LogLevel.Debug)]
+    [InlineData(LogLevel.Information)]
+    [InlineData(LogLevel.Warning)]
+    [InlineData(LogLevel.Critical)]
+    public void LogExcInFctCall_AutoDetect_CustomLevel_LogsAtThatLevel(LogLevel level)
     {
-        // arrange
         var exc = new Exception("Test");
-        _logger.Setup(x => x.Log(LogLevel.Error, 0, It.IsAny<object>(),
-            It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>()!)).Verifiable();
 
-        // act
-        _logger.Object.LogExcInFctCall(exc, GetType(),
-            MethodBase.GetCurrentMethod(), "TestMSG");
+        _logger.Object.LogExcInFctCall(exc, null, level);
 
-        // assert
         _logger.Verify(x => x.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
-                0,
-                It.Is<It.IsAnyType>((o, t) =>
+                It.Is<LogLevel>(l => l == level),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_AutoDetect_LoggingDisabled_DoesNotLog()
+    {
+        var logger = new Mock<ILogger>();
+        logger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(false);
+        var exc = new Exception("Test");
+
+        logger.Object.LogExcInFctCall(exc);
+
+        logger.Verify(x => x.Log(
+                It.IsAny<LogLevel>(),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Never);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_AutoDetect_NullLogger_ThrowsArgumentNullException()
+    {
+        ILogger? nullLogger = null;
+        Assert.Throws<ArgumentNullException>(() => nullLogger!.LogExcInFctCall(new Exception()));
+    }
+
+    [Fact]
+    public void LogExcInFctCall_AutoDetect_NullException_ThrowsArgumentNullException() =>
+        Assert.Throws<ArgumentNullException>(() => _logger.Object.LogExcInFctCall(null!));
+
+    #endregion
+
+    #region LogExcInFctCall — explicit type/method overload
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_NoMsg_LogsErrorWithoutCustomMsg()
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod());
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
                     o.ToString()!.Equals(
                         $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
-                        $"{nameof(LogExcInFctCallTest4)}\nTestMSG")),
+                        $"{nameof(LogExcInFctCall_Explicit_NoMsg_LogsErrorWithoutCustomMsg)}")),
                 It.Is<Exception>(e => e == exc),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()!),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_WithMsg_AppendsNewlineAndMsg()
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), "TestMSG");
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.Equals(
+                        $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
+                        $"{nameof(LogExcInFctCall_Explicit_WithMsg_AppendsNewlineAndMsg)}\nTestMSG")),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void LogExcInFctCall_Explicit_NullOrWhitespaceMsg_LogsWithoutCustomMsg(string? msg)
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), msg);
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.Equals(
+                        $"Exception thrown in: {nameof(FunctionLoggingTests)} -> " +
+                        $"{nameof(LogExcInFctCall_Explicit_NullOrWhitespaceMsg_LogsWithoutCustomMsg)}")),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Theory]
+    [InlineData(LogLevel.Trace)]
+    [InlineData(LogLevel.Debug)]
+    [InlineData(LogLevel.Information)]
+    [InlineData(LogLevel.Warning)]
+    [InlineData(LogLevel.Critical)]
+    public void LogExcInFctCall_Explicit_CustomLevel_LogsAtThatLevel(LogLevel level)
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), null, level);
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == level),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_LoggingDisabled_DoesNotLog()
+    {
+        var logger = new Mock<ILogger>();
+        logger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(false);
+        var exc = new Exception("Test");
+
+        logger.Object.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod());
+
+        logger.Verify(x => x.Log(
+                It.IsAny<LogLevel>(),
+                It.IsAny<EventId>(),
+                It.IsAny<It.IsAnyType>(),
+                It.IsAny<Exception?>(),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Never);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_NullLogger_ThrowsArgumentNullException()
+    {
+        ILogger? nullLogger = null;
+        Assert.Throws<ArgumentNullException>(() =>
+            nullLogger!.LogExcInFctCall(new Exception(), GetType(), MethodBase.GetCurrentMethod()));
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_NullException_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() =>
+            _logger.Object.LogExcInFctCall(null!, GetType(), MethodBase.GetCurrentMethod()));
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_NullClassType_LogsNullClassName()
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, null, MethodBase.GetCurrentMethod());
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.StartsWith("Exception thrown in: (null) -> ")),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
+            Times.Once);
+    }
+
+    [Fact]
+    public void LogExcInFctCall_Explicit_NullMethodType_LogsNullMethodName()
+    {
+        var exc = new Exception("Test");
+
+        _logger.Object.LogExcInFctCall(exc, GetType(), null);
+
+        _logger.Verify(x => x.Log(
+                It.Is<LogLevel>(l => l == LogLevel.Error),
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, _) =>
+                    o.ToString()!.StartsWith(
+                        $"Exception thrown in: {nameof(FunctionLoggingTests)} -> ")),
+                It.Is<Exception>(e => e == exc),
+                It.IsAny<Func<It.IsAnyType, Exception?, string>>()!),
             Times.Once);
     }
 
